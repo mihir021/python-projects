@@ -32,8 +32,6 @@ htmlcov/
 .ruff_cache/
 .pyre/
 
-# Jupyter Notebook
-.ipynb_checkpoints/
 
 # IDE / editor files
 .vscode/

@@ -1,0 +1,15 @@
+,Enroll,Name,Branch,CGPA,Intern_Company,Stipend,Attendance,City,Skills,Placed
+0,101,Arjun,CSE,8.2,TCS,15000,85,Ahmedabad,Python,Yes
+1,102,Riya,IT,7.5,Infosys,12000,78,Surat,Java,No
+2,103,Karan,CSE,9.1,,20000,92,Ahmedabad,Python,Yes
+3,104,Meera,CE,6.8,Wipro,,65,Vadodara,C++,No
+4,105,Dev,IT,8,Capgemini,14000,88,Surat,Java,Yes
+5,106,Anjali,CSE,7.2,TCS,15000,,Ahmedabad,Python,No
+6,107,Rohit,CE,6.5,,10000,60,Vadodara,C++,No
+7,108,Pooja,IT,8.7,Infosys,12000,90,Surat,Java,Yes
+8,109,Amit,CSE,9.5,Google,50000,95,Ahmedabad,Python,Yes
+9,110,Neha,CE,7,Wipro,11000,70,,C++,No
+10,111,Arjun,CSE,8.2,TCS,15000,85,Ahmedabad,Python,Yes
+11,112,Sneha,IT,,Capgemini,14000,80,Surat,Java,Yes
+12,113,Vikram,CSE,7.8,,18000,82,Ahmedabad,Python,No
+13,114,Riya,IT,7.5,Infosys,12000,78,Surat,Java,No

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>PWA Music Player</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0a0a0c">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <!-- Fonts and Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+</head>
+<body>
+    <div id="app" class="app-container">
+        <!-- Views -->
+        <main class="views">
+            <!-- Library / Home View -->
+            <section id="view-library" class="view active">
+                <header class="view-header">
+                    <h1>Library</h1>
+                    <button class="icon-btn" id="upload-btn" aria-label="Upload Song">
+                        <span class="material-symbols-rounded">upload_file</span>
+                    </button>
+                    <input type="file" id="file-upload" accept="audio/mp3, audio/wav, audio/ogg" multiple hidden>
+                </header>
+                <div class="view-content" id="library-list">
+                    <!-- Song items will be injected here -->
+                </div>
+            </section>
+
+            <!-- Search View -->
+            <section id="view-search" class="view hidden">
+                <header class="view-header sticky">
+                    <h1>Search</h1>
+                    <div class="search-bar">
+                        <span class="material-symbols-rounded">search</span>
+                        <input type="text" id="search-input" placeholder="Songs, Artists, Albums">
+                    </div>
+                </header>
+                <div class="view-content" id="search-results">
+                    <!-- Search results here -->
+                    <div class="empty-state">
+                        <span class="material-symbols-rounded">manage_search</span>
+                        <p>Find your favorite music</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Favorites View -->
+            <section id="view-favorites" class="view hidden">
+                <header class="view-header">
+                    <h1>Favorites</h1>
+                </header>
+                <div class="view-content" id="favorites-list">
+                    <!-- Favorite items here -->
+                </div>
+            </section>
+
+            <!-- Playlists View -->
+            <section id="view-playlists" class="view hidden">
+                <header class="view-header">
+                    <h1>Playlists</h1>
+                    <button class="icon-btn" id="create-playlist-btn">
+                        <span class="material-symbols-rounded">add</span>
+                    </button>
+                </header>
+                <div class="view-content" id="playlists-list">
+                    <!-- Playlists items here -->
+                </div>
+            </section>
+
+            <!-- Playlist Detail Sub-View -->
+            <section id="view-playlist-detail" class="view hidden">
+                <header class="view-header sticky">
+                    <div style="display: flex; align-items: center; gap: var(--spacing-md); width: 100%;">
+                        <button class="icon-btn" id="back-to-playlists" aria-label="Back">
+                            <span class="material-symbols-rounded">arrow_back</span>
+                        </button>
+                        <h1 id="detail-playlist-title" class="truncate" style="flex: 1; font-size: 1.5rem; margin-bottom: 0;">Playlist</h1>
+                        <button class="icon-btn" id="add-songs-to-pl-btn" title="Add Songs to Playlist">
+                            <span class="material-symbols-rounded">playlist_add</span>
+                        </button>
+                    </div>
+                </header>
+                <div class="view-content" id="playlist-detail-list">
+                    <!-- Songs in this playlist -->
+                </div>
+            </section>
+        </main>
+
+        <!-- Mini Player -->
+        <div id="mini-player" class="mini-player">
+            <div class="mini-player-content">
+                <img id="mini-cover" src="assets/icons/default-cover.png" alt="Cover" class="mini-cover">
+                <div class="mini-info">
+                    <span id="mini-title" class="truncate">Select a song</span>
+                    <span id="mini-artist" class="truncate metadata">Library</span>
+                </div>
+            </div>
+            <div class="mini-controls">
+                <button class="icon-btn" id="mini-play-btn">
+                    <span class="material-symbols-rounded">play_arrow</span>
+                </button>
+                <button class="icon-btn" id="mini-next-btn">
+                    <span class="material-symbols-rounded">skip_next</span>
+                </button>
+            </div>
+            <div class="mini-progress-bar" id="mini-progress-bar"></div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <button class="nav-item active" data-target="view-library">
+                <span class="material-symbols-rounded">library_music</span>
+                <span class="nav-label">Library</span>
+            </button>
+            <button class="nav-item" data-target="view-search">
+                <span class="material-symbols-rounded">search</span>
+                <span class="nav-label">Search</span>
+            </button>
+            <button class="nav-item" data-target="view-favorites">
+                <span class="material-symbols-rounded">favorite</span>
+                <span class="nav-label">Favorites</span>
+            </button>
+            <button class="nav-item" data-target="view-playlists">
+                <span class="material-symbols-rounded">queue_music</span>
+                <span class="nav-label">Playlists</span>
+            </button>
+        </nav>
+
+        <!-- Full Screen Now Playing -->
+        <div id="now-playing-screen" class="now-playing-screen hidden">
+            <div class="bg-blur" id="now-playing-bg"></div>
+            <div class="np-header">
+                <button class="icon-btn" id="minimize-player-btn">
+                    <span class="material-symbols-rounded">keyboard_arrow_down</span>
+                </button>
+                <span class="np-subtitle">Now Playing</span>
+                <button class="icon-btn" id="np-menu-btn">
+                    <span class="material-symbols-rounded">more_horiz</span>
+                </button>
+            </div>
+
+            <div class="np-art-container">
+                <img id="np-cover" src="assets/icons/default-cover.png" alt="Album Art">
+            </div>
+
+            <div class="np-info-section">
+                <div class="np-text">
+                    <h2 id="np-title" class="marquee">Select a song</h2>
+                    <h3 id="np-artist">Library</h3>
+                </div>
+                <button class="icon-btn toggle-favorite" id="np-favorite-btn">
+                    <span class="material-symbols-rounded">favorite_border</span>
+                </button>
+            </div>
+
+            <div class="np-progress-section">
+                <div class="progress-container" id="progress-container">
+                    <div class="progress-bar-bg"></div>
+                    <div class="progress-bar-fill" id="progress-bar-fill"></div>
+                    <div class="progress-handle" id="progress-handle"></div>
+                </div>
+                <div class="time-readout">
+                    <span id="current-time">0:00</span>
+                    <span id="total-time">0:00</span>
+                </div>
+            </div>
+
+            <div class="np-controls">
+                <button class="icon-btn control-secondary" id="shuffle-btn">
+                    <span class="material-symbols-rounded">shuffle</span>
+                </button>
+                <button class="icon-btn control-primary" id="prev-btn">
+                    <span class="material-symbols-rounded">skip_previous</span>
+                </button>
+                <button class="icon-btn control-super" id="play-pause-btn">
+                    <span class="material-symbols-rounded" id="play-icon">play_arrow</span>
+                </button>
+                <button class="icon-btn control-primary" id="next-btn">
+                    <span class="material-symbols-rounded">skip_next</span>
+                </button>
+                <button class="icon-btn control-secondary" id="repeat-btn">
+                    <span class="material-symbols-rounded">repeat</span>
+                </button>
+            </div>
+            
+            <div class="np-volume-section desktop-only">
+                <span class="material-symbols-rounded">volume_down</span>
+                <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1">
+                <span class="material-symbols-rounded">volume_up</span>
+            </div>
+        </div>
+
+        <!-- Audio Element (hidden) -->
+        <audio id="audio-player"></audio>
+
+        <!-- Toast Notification -->
+        <div id="toast" class="toast">Message</div>
+
+        <!-- Modal Overlay for Create Playlist -->
+        <div id="playlist-modal" class="modal-overlay hidden">
+            <div class="modal">
+                <h3>New Playlist</h3>
+                <input type="text" id="playlist-name-input" placeholder="Playlist Name">
+                <div class="modal-actions">
+                    <button class="btn-text" id="cancel-playlist-btn">Cancel</button>
+                    <button class="btn-primary" id="save-playlist-btn">Save</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Overlay for Selecting Playlist -->
+        <div id="select-playlist-modal" class="modal-overlay hidden">
+            <div class="modal modal-tall">
+                <h3>Add to Playlist</h3>
+                <div class="modal-list" id="select-playlist-list">
+                    <!-- Options injected here -->
+                </div>
+                <div class="modal-actions">
+                    <button class="btn-text" id="cancel-select-playlist-btn">Cancel</button>
+                    <button class="btn-primary" id="create-new-pl-from-select-btn">Create New</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal: Add Songs to Playlist -->
+        <div id="add-songs-modal" class="modal-overlay hidden">
+            <div class="modal modal-tall">
+                <h3>Add Songs</h3>
+                <div class="search-bar" style="margin-bottom: var(--spacing-md); border-radius: var(--radius-md);">
+                    <span class="material-symbols-rounded">search</span>
+                    <input type="text" id="add-songs-search" placeholder="Search songs...">
+                </div>
+                <div class="modal-list" id="add-songs-list">
+                    <!-- Injected dynamically -->
+                </div>
+                <div class="modal-actions">
+                    <button class="btn-text" id="close-add-songs-modal">Done</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="data/songs.js"></script>
+    <script src="assets/js/ui.js"></script>
+    <script src="assets/js/playlist.js"></script>
+    <script src="assets/js/player.js"></script>
+    <script src="assets/js/app.js?v=4"></script>
+</body>
+</html>

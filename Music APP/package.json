@@ -1,0 +1,16 @@
+{
+  "name": "music-app",
+  "version": "1.0.0",
+  "description": "A premium, offline-ready personal music player built with pure HTML, CSS, and Vanilla JavaScript. Optimized for iPhone and backed by MongoDB (single-user).",
+  "main": "service-worker.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "playwright": "^1.59.0"
+  }
+}

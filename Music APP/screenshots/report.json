@@ -1,0 +1,54 @@
+{
+  "issues": [],
+  "tests": [
+    {
+      "name": "Play a song",
+      "status": "PASS"
+    },
+    {
+      "name": "Pause a song",
+      "status": "PASS"
+    },
+    {
+      "name": "Next song changes title",
+      "status": "PASS"
+    },
+    {
+      "name": "Seek to middle",
+      "status": "PASS"
+    },
+    {
+      "name": "Shuffle toggles on",
+      "status": "PASS"
+    },
+    {
+      "name": "Repeat cycle",
+      "status": "PASS"
+    },
+    {
+      "name": "Search filters songs",
+      "status": "PASS"
+    },
+    {
+      "name": "Favorites toggle",
+      "status": "PASS"
+    },
+    {
+      "name": "Create playlist",
+      "status": "PASS"
+    },
+    {
+      "name": "Manifest loads",
+      "status": "PASS"
+    },
+    {
+      "name": "Service worker registered",
+      "status": "PASS"
+    },
+    {
+      "name": "Offline shell loads",
+      "status": "PASS"
+    }
+  ],
+  "fatalError": null
+}

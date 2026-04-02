@@ -1,0 +1,47 @@
+[
+    {
+        "id": "1",
+        "title": "Chill Vibes",
+        "artist": "LoFi Dreamer",
+        "album": "Midnight Sessions",
+        "duration": 185,
+        "cover": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=500&q=80",
+        "src": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+    },
+    {
+        "id": "2",
+        "title": "Neon Sunset",
+        "artist": "Synthwave Cult",
+        "album": "Retro Future",
+        "duration": 210,
+        "cover": "https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=500&q=80",
+        "src": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+    },
+    {
+        "id": "3",
+        "title": "Acoustic Morning",
+        "artist": "Sunshine Beats",
+        "album": "Coffee Shop",
+        "duration": 245,
+        "cover": "https://images.unsplash.com/photo-1445985543470-41fba5c3144a?w=500&q=80",
+        "src": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
+    },
+    {
+        "id": "4",
+        "title": "Deep Focus",
+        "artist": "Ambient Master",
+        "album": "Flow State",
+        "duration": 300,
+        "cover": "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=500&q=80",
+        "src": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"
+    },
+    {
+        "id": "5",
+        "title": "Upbeat Energy",
+        "artist": "Workout DJs",
+        "album": "Gym Anthems",
+        "duration": 195,
+        "cover": "https://images.unsplash.com/photo-1534258936925-c58bed470cb1?w=500&q=80",
+        "src": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3"
+    }
+]
